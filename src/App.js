@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <h2>There is life.</h2>
     </div>
   );
 }
