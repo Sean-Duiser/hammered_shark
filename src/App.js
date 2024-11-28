@@ -18,7 +18,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <h2>There is life. There is growth.</h2>
+      <h2>There is life. There is growth. There is connection.</h2>
     </div>
   );
 }
