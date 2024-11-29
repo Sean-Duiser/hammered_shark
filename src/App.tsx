@@ -2,7 +2,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';  // Ensure Bootstrap CSS is imported
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import About from './about';  // Import the About page
+import About from './About';  // Import the About page
 import Contact from './Contact';
 import logo from './assets/hs_logo.jpg';
 
@@ -83,8 +83,8 @@ function App() {
                 </a>
               </>
             } />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Contact" element={<Contact />} />
           </Routes>
         </div>
       </div>
