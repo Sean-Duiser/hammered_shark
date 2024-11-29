@@ -43,6 +43,11 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="https://open.spotify.com/show/4YHaaQy9Fz830CZdT2fTRZ">
+                    Podcast
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="https://www.facebook.com/HammeredShark" target="_blank" rel="noopener noreferrer">
                     Facebook
                   </Link>
