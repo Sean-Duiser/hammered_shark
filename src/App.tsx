@@ -2,7 +2,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';  // Ensure Bootstrap CSS is imported
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import About from './About';  // Import the About page
+import { Link } from 'react-router-dom';
+import About from './About'; 
 import Contact from './Contact';
 import logo from './assets/hs_logo.jpg';
 
@@ -27,24 +28,24 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">
+                  <Link className="nav-link active" aria-current="page" to="/">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/About">
+                  <Link className="nav-link" to="/About">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/Contact">
+                  <Link className="nav-link" to="/Contact">
                     Contact
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="https://www.facebook.com/HammeredShark" target="_blank" rel="noopener noreferrer">
+                  <Link className="nav-link" to="https://www.facebook.com/HammeredShark" target="_blank" rel="noopener noreferrer">
                     Facebook
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
