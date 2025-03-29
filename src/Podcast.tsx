@@ -1,5 +1,4 @@
 import episodesData from './episodes.json';
-import { useEffect } from 'react';
 
 interface Episode {
   title: string;
@@ -8,7 +7,7 @@ interface Episode {
   spotifyUrl: string;
 }
 
-const episodes: Episode[] = episodesData;
+const episodes = episodesData as Episode[];
 
 function Podcast() {
   return (
@@ -31,7 +30,7 @@ function Podcast() {
 
       {/* Episode Listing */}
       <div className="row">
-        {episodes.map((ep: Episode, index: number) => (
+        {episodes.map((ep, index) => (
           <div className="col-md-6 mb-4" key={index}>
             <div className="card h-100 shadow">
               <img src={ep.thumbnail} className="card-img-top" alt={ep.title} />
