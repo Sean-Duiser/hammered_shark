@@ -26,9 +26,10 @@ function Podcast() {
         const xml = parser.parseFromString(text, 'application/xml');
         const items = Array.from(xml.querySelectorAll('item'));
 
-        const parsedEpisodes: Episode[] = items.map(item => {
-          const title = item.querySelector('title')?.textContent || 'Untitled Episode';
-          const description = item.querySelector('description')?.textContent || '';
+        const parsedEpisodes: Episode[] = items.map((item) => {
+          const title = item.querySelector('title')?.textContent?.trim() || 'Untitled Episode';
+          const rawDescription = item.querySelector('description')?.textContent || '';
+          const description = stripHtml(rawDescription).trim();
           const pubDate = item.querySelector('pubDate')?.textContent || '';
           const link = item.querySelector('link')?.textContent || '#';
           const thumbnail =
@@ -50,7 +51,7 @@ function Podcast() {
   }, []);
 
   const handleLoadMore = () => {
-    setVisibleCount(prev => prev + EPISODES_PER_PAGE);
+    setVisibleCount((prev) => prev + EPISODES_PER_PAGE);
   };
 
   const formatDate = (dateStr: string) => {
@@ -58,13 +59,14 @@ function Podcast() {
     return date.toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
   const stripHtml = (html: string) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || '';
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || '';
   };
 
   return (
@@ -91,7 +93,7 @@ function Podcast() {
           <EpisodeCard
             key={index}
             title={ep.title}
-            description={`${stripHtml(ep.description)} (${formatDate(ep.pubDate)})`}
+            description={`${ep.description}\n(${formatDate(ep.pubDate)})`}
             thumbnail={ep.thumbnail}
             spotifyUrl={ep.link}
           />
