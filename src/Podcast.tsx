@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react';
-import Parser from 'rss-parser';
 import EpisodeCard from './components/EpisodeCard';
 
 interface Episode {
   title: string;
-  link: string;
+  description: string;
+  thumbnail: string;
   pubDate: string;
-  contentSnippet: string;
-  enclosure?: {
-    url: string;
-  };
-  itunes?: {
-    image: string;
-  };
+  link: string;
 }
-
-const parser = new Parser({
-  customFields: {
-    item: ['itunes:image']
-  }
-});
 
 const PODCAST_RSS_URL = 'https://anchor.fm/s/ee587674/podcast/rss';
 const EPISODES_PER_PAGE = 4;
@@ -31,10 +19,27 @@ function Podcast() {
   useEffect(() => {
     const fetchFeed = async () => {
       try {
-        const feed = await parser.parseURL(PODCAST_RSS_URL);
-        setEpisodes(feed.items as Episode[]);
-      } catch (err) {
-        console.error('Failed to fetch RSS feed:', err);
+        const response = await fetch(PODCAST_RSS_URL);
+        const text = await response.text();
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'application/xml');
+        const items = Array.from(xml.querySelectorAll('item'));
+
+        const parsedEpisodes: Episode[] = items.map(item => ({
+          title: item.querySelector('title')?.textContent || 'Untitled Episode',
+          description: item.querySelector('description')?.textContent || '',
+          thumbnail:
+            item.querySelector('itunes\\:image')?.getAttribute('href') ||
+            '/images/fallback.jpg',
+          pubDate: item.querySelector('pubDate')?.textContent || '',
+          link: item.querySelector('link')?.textContent || '#',
+        }));
+
+        setEpisodes(parsedEpisodes);
+      } catch (error) {
+        console.error('Error fetching RSS feed:', error);
+        setEpisodes([]);
       }
     };
 
@@ -42,7 +47,7 @@ function Podcast() {
   }, []);
 
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + EPISODES_PER_PAGE);
+    setVisibleCount(prev => prev + EPISODES_PER_PAGE);
   };
 
   const formatDate = (dateStr: string) => {
@@ -57,9 +62,9 @@ function Podcast() {
   return (
     <div className="container text-center" style={{ paddingTop: '80px' }}>
       <h1 className="mb-4">Wit & Grit – Latest Episodes</h1>
-      <p className="lead mb-4">Auto-updating feed of podcast episodes, fresh from the mic 🎙️</p>
+      <p className="lead mb-4">Auto-updating from our podcast feed 🎙️</p>
 
-      {/* Embedded Spotify Player */}
+      {/* Spotify Player */}
       <div className="mb-5">
         <iframe
           src="https://open.spotify.com/embed/show/4YHaaQy9Fz830CZdT2fTRZ"
@@ -78,8 +83,8 @@ function Podcast() {
           <EpisodeCard
             key={index}
             title={ep.title}
-            description={`${ep.contentSnippet} (${formatDate(ep.pubDate)})`}
-            thumbnail={ep.itunes?.image || '/images/fallback.jpg'}
+            description={`${ep.description} (${formatDate(ep.pubDate)})`}
+            thumbnail={ep.thumbnail}
             spotifyUrl={ep.link}
           />
         ))}
