@@ -26,16 +26,15 @@ function Podcast() {
         const xml = parser.parseFromString(text, 'application/xml');
         const items = Array.from(xml.querySelectorAll('item'));
 
-        const parsedEpisodes: Episode[] = items.map((item) => {
+        const parsedEpisodes: Episode[] = items.map((item, index) => {
           const title = item.querySelector('title')?.textContent?.trim() || 'Untitled Episode';
           const rawDescription = item.querySelector('description')?.textContent || '';
           const description = stripHtml(rawDescription).trim();
           const pubDate = item.querySelector('pubDate')?.textContent || '';
           const link = item.querySelector('link')?.textContent || '#';
-          const thumbnail =
-            item.querySelector('itunes\\:image')?.getAttribute('href') ||
-            item.querySelector('image')?.textContent ||
-            '/images/fallback.jpg';
+
+          // Football-themed random image from Unsplash
+          const thumbnail = `https://source.unsplash.com/random/600x400/?football&sig=${index}`;
 
           return { title, description, pubDate, link, thumbnail };
         });
@@ -93,7 +92,7 @@ function Podcast() {
           <EpisodeCard
             key={index}
             title={ep.title}
-            description={`${ep.description}\n(${formatDate(ep.pubDate)})`}
+            description={`${stripHtml(ep.description)} (${formatDate(ep.pubDate)})`}
             thumbnail={ep.thumbnail}
             spotifyUrl={ep.link}
           />
