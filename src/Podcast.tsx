@@ -26,15 +26,18 @@ function Podcast() {
         const xml = parser.parseFromString(text, 'application/xml');
         const items = Array.from(xml.querySelectorAll('item'));
 
-        const parsedEpisodes: Episode[] = items.map(item => ({
-          title: item.querySelector('title')?.textContent || 'Untitled Episode',
-          description: item.querySelector('description')?.textContent || '',
-          thumbnail:
+        const parsedEpisodes: Episode[] = items.map(item => {
+          const title = item.querySelector('title')?.textContent || 'Untitled Episode';
+          const description = item.querySelector('description')?.textContent || '';
+          const pubDate = item.querySelector('pubDate')?.textContent || '';
+          const link = item.querySelector('link')?.textContent || '#';
+          const thumbnail =
             item.querySelector('itunes\\:image')?.getAttribute('href') ||
-            '/images/fallback.jpg',
-          pubDate: item.querySelector('pubDate')?.textContent || '',
-          link: item.querySelector('link')?.textContent || '#',
-        }));
+            item.querySelector('image')?.textContent ||
+            '/images/fallback.jpg';
+
+          return { title, description, pubDate, link, thumbnail };
+        });
 
         setEpisodes(parsedEpisodes);
       } catch (error) {
@@ -57,6 +60,11 @@ function Podcast() {
       month: 'long',
       day: 'numeric'
     });
+  };
+
+  const stripHtml = (html: string) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
   };
 
   return (
@@ -83,7 +91,7 @@ function Podcast() {
           <EpisodeCard
             key={index}
             title={ep.title}
-            description={`${ep.description} (${formatDate(ep.pubDate)})`}
+            description={`${stripHtml(ep.description)} (${formatDate(ep.pubDate)})`}
             thumbnail={ep.thumbnail}
             spotifyUrl={ep.link}
           />
