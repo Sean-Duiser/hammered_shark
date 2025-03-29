@@ -34,7 +34,7 @@ function Podcast() {
           const link = item.querySelector('link')?.textContent || '#';
 
           // Football-themed random image from Unsplash
-          const thumbnail = `https://source.unsplash.com/random/600x400/?football&sig=${index}`;
+          const thumbnail = `https://picsum.photos/seed/football${index}/600/400`;
 
           return { title, description, pubDate, link, thumbnail };
         });
