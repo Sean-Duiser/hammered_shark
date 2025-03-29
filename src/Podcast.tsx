@@ -1,4 +1,14 @@
-import episodes from './episodes.json';
+import episodesData from './episodes.json';
+import { useEffect } from 'react';
+
+interface Episode {
+  title: string;
+  description: string;
+  thumbnail: string;
+  spotifyUrl: string;
+}
+
+const episodes: Episode[] = episodesData;
 
 function Podcast() {
   return (
@@ -21,7 +31,7 @@ function Podcast() {
 
       {/* Episode Listing */}
       <div className="row">
-        {episodes.map((ep, index) => (
+        {episodes.map((ep: Episode, index: number) => (
           <div className="col-md-6 mb-4" key={index}>
             <div className="card h-100 shadow">
               <img src={ep.thumbnail} className="card-img-top" alt={ep.title} />
