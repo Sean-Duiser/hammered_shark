@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import About from './About'; 
 import Contact from './Contact';
 import Podcast from './Podcast';
-import logo from './assets/hs_logo.jpg';
+import logo from './assets/Shark-01-2-1.png';
 
 function App() {
   // State to manage navbar toggle
