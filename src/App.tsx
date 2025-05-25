@@ -2,12 +2,12 @@ import { useState } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import SubstackEmbed from './components/SubstackEmbed';
-
+import SubstackSignup from './components/SubstackSignup';
+import SubstackPostEmbed from './components/SubstackEmbed';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import About from './About'; 
+import About from './About';
 import Contact from './Contact';
 import Podcast from './Podcast';
 
@@ -24,12 +24,12 @@ function App() {
         {/* Navbar */}
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
-            <button 
-              className="navbar-toggler" 
-              type="button" 
+            <button
+              className="navbar-toggler"
+              type="button"
               onClick={toggleNavbar}
-              aria-controls="navbarNav" 
-              aria-expanded={!isNavbarCollapsed} 
+              aria-controls="navbarNav"
+              aria-expanded={!isNavbarCollapsed}
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon"></span>
@@ -78,22 +78,44 @@ function App() {
             <Route
               path="/"
               element={
-                <>
-                  {/* Home Page Content */}
-                  <SubstackEmbed />
-                  <a 
-                    href="https://www.facebook.com/HammeredShark" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    aria-label="Visit our Facebook page"
-                    className="btn btn-primary btn-lg"
-                  >
-                    Visit Our Social!
-                  </a>
-                  
-                </>
+                <div className="container py-5" style={{ paddingTop: '80px' }}>
+                  <div className="row justify-content-center">
+                    <div className="col-12 col-lg-10 text-center">
+
+                      {/* Title Header */}
+                      <h3 className="shark-header">
+                        Hammered Shark Productions
+                      </h3>
+
+                      {/* Substack Post Preview */}
+                      <div className="mb-5">
+                        <SubstackPostEmbed />
+                      </div>
+
+                      {/* Substack Signup */}
+                      <div className="mb-5">
+                        <SubstackSignup />
+                      </div>
+
+                      {/* CTA */}
+                      <div className="text-light">
+                        <a
+                          href="https://www.facebook.com/HammeredShark"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Visit our Facebook page"
+                          className="btn btn-primary btn-lg"
+                        >
+                          Visit Our Social!
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               }
             />
+
             <Route path="/About" element={<About />} />
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Podcast" element={<Podcast />} />
