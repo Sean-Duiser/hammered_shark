@@ -2,6 +2,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import SubstackEmbed from './components/SubstackEmbed';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -80,20 +81,7 @@ function App() {
               element={
                 <>
                   {/* Home Page Content */}
-                  <a 
-                    href="https://www.facebook.com/HammeredShark" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    aria-label="Visit Hammered Shark on Facebook"
-                  >
-                    <img 
-                      src={logo}  
-                      alt="Hammered Shark Logo" 
-                      className="logo mb-4" 
-                      style={{ maxWidth: '100%', height: 'auto' }} 
-                    />
-                  </a>
-
+                  <SubstackEmbed />
                   <a 
                     href="https://www.facebook.com/HammeredShark" 
                     target="_blank" 
@@ -103,6 +91,7 @@ function App() {
                   >
                     Visit Our Social!
                   </a>
+                  
                 </>
               }
             />
