@@ -40,11 +40,28 @@ const SubstackSignup: React.FC = () => {
   return (
     <div className="d-flex justify-content-center mt-5 w-100">
       <div className="shark-breach signup-header-overlay text-center text-light w-100 p-4 rounded" style={{ maxWidth: '800px' }}>
+
+        {/* Hammered Shark Productions heading */}
+        <h3
+          className="mb-4"
+          style={{
+            color: '#00ffff',
+            fontFamily: 'Bebas Neue, Impact, sans-serif',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+            fontSize: '2rem'
+          }}
+        >
+          Hammered Shark Productions
+        </h3>
+
+
+        {/* All-In With Ian section */}
         <h2 className="mb-2" style={{ color: '#00ffff', fontFamily: 'Bebas Neue, Impact, sans-serif' }}>
           All-In With Ian 🦈
         </h2>
         <p className="mb-4 text-muted" style={{ fontSize: '1rem' }}>
-          Weekly football bets, unfiltered takes, and the S.H.A.R.K. Scale grading system.
+          Weekly football bets, unfiltered takes, and the S.H.A.R.K. Scale grading system.<br/>
           Get it all—straight to your inbox.
         </p>
 

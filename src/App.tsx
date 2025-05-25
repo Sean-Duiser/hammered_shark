@@ -83,18 +83,16 @@ function App() {
                     <div className="col-12 col-lg-10 text-center">
 
                       {/* Title Header */}
-                      <h3 className="shark-header">
-                        Hammered Shark Productions
-                      </h3>
-
-                      {/* Substack Post Preview */}
-                      <div className="mb-5">
-                        <SubstackPostEmbed />
-                      </div>
+                      
 
                       {/* Substack Signup */}
                       <div className="mb-5">
                         <SubstackSignup />
+                      </div>
+
+                      {/* Substack Post Preview */}
+                      <div className="mb-5">
+                        <SubstackPostEmbed />
                       </div>
 
                       {/* CTA */}
