@@ -2,8 +2,8 @@ import { useState } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import SubstackSignup from './components/SubstackSignup';
-import SubstackPostEmbed from './components/SubstackEmbed';
+import SubstackPostEmbed from './components/SubstackPostEmbed';
+import DynamicSubstackCard from './components/DynamicSubstackCard';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -82,17 +82,26 @@ function App() {
                   <div className="row justify-content-center">
                     <div className="col-12 col-lg-10 text-center">
 
-                      {/* Title Header */}
-                      
+                      {/* Hammered Shark Box */}
+                      <div className="shark-breach signup-header-overlay text-light w-100 p-4 rounded mb-5" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                        <h3
+                          className="mb-4"
+                          style={{
+                            color: '#00ffff',
+                            fontFamily: 'Bebas Neue, Impact, sans-serif',
+                            letterSpacing: '1px',
+                            textTransform: 'uppercase',
+                            fontSize: '2rem'
+                          }}
+                        >
+                          Hammered Shark Productions
+                        </h3>
 
-                      {/* Substack Signup */}
-                      <div className="mb-5">
-                        <SubstackSignup />
-                      </div>
-
-                      {/* Substack Post Preview */}
-                      <div className="mb-5">
+                        {/* Substack Embed */}
                         <SubstackPostEmbed />
+
+                        {/* Custom Post Preview */}
+                        <DynamicSubstackCard />
                       </div>
 
                       {/* CTA */}
